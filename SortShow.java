@@ -110,7 +110,9 @@ public class SortShow extends JPanel {
 			//getting the date and time when the recursive merge sort starts
 			Calendar start = Calendar.getInstance();
 			//assigning the size for the tempArray below
+			tempArray = new int[total_number_of_lines];
 
+			R_MergeSort(0, total_number_of_lines - 1);
 			//You need to complete this part.
 
 			Calendar end = Calendar.getInstance();
@@ -122,10 +124,15 @@ public class SortShow extends JPanel {
 		public void R_MergeSort(int first, int last){
 			if(first < last){
 
+				int mid = (first + last) / 2;
+				R_MergeSort(first, mid);
+				R_MergeSort(mid + 1, last);
+
+				R_Merge(first, mid, last);
 				//You need to complete this part.
 
 				//Causing a delay for 10ms
-				delay(10); 
+				delay(10);
 			}
 		}
 
@@ -133,6 +140,45 @@ public class SortShow extends JPanel {
 		//recursive merge sort method
 		public void R_Merge(int first, int mid, int last){
 
+			int beginHalf1 = first;
+			int endHalf1 = mid;
+			int beginHalf2 = mid+1;
+			int endHalf2 = last;
+			int index = 0;
+
+			while((beginHalf1 <= endHalf1)&&(beginHalf2 <= endHalf2))
+			{
+				if(lines_lengths[beginHalf1] < lines_lengths[beginHalf2])
+				{
+					tempArray[index] = lines_lengths[beginHalf1];
+					beginHalf1++;
+				}
+				else
+				{
+					tempArray[index] = lines_lengths[beginHalf2];
+					beginHalf2++;
+				}
+				index++;
+			}
+
+			while(beginHalf1 <= endHalf1)
+			{
+				tempArray[index] = lines_lengths[beginHalf1];
+				beginHalf1++;
+				index++;
+			}
+			while(beginHalf2 <= endHalf2)
+			{
+				tempArray[index] = lines_lengths[beginHalf2];
+				beginHalf2++;
+				index++;
+			}
+
+			for(int i = first; i < last; i++)
+			{
+				lines_lengths[i] = tempArray[i];
+				paintComponent(this.getGraphics());
+			}
 			//You need to complete this part.
 				
 		}
