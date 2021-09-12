@@ -144,7 +144,7 @@ public class SortShow extends JPanel {
 			int endHalf1 = mid;
 			int beginHalf2 = mid+1;
 			int endHalf2 = last;
-			int index = 0;
+			int index = beginHalf1;
 
 			while((beginHalf1 <= endHalf1)&&(beginHalf2 <= endHalf2))
 			{
@@ -174,11 +174,11 @@ public class SortShow extends JPanel {
 				index++;
 			}
 
-			for(int i = first; i < last; i++)
+			for(int i = first; i <= last; i++)
 			{
 				lines_lengths[i] = tempArray[i];
-				paintComponent(this.getGraphics());
 			}
+			paintComponent(this.getGraphics());
 			//You need to complete this part.
 				
 		}
