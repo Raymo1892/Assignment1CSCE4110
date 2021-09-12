@@ -219,19 +219,77 @@ public class SortShow extends JPanel {
 	    SortGUI.imergeTime = end.getTime().getTime() - start.getTime().getTime();
 	} 
 
-	// Merges segments pairs (certain length) within an array 
+	// Merges segments pairs (certain length) within an array
+	//returns the index after the last merged pair
 	public int I_MergeSegmentPairs(int l, int segmentLength)
 	{
 		//The length of the two merged segments 
 
 		//You need to complete this part.
+		int mergedPairLength = 2 * segmentLength;
+		int numPairs = l / mergedPairLength;
 
-		return 1;//modify this line
+		int beginSegment1 = 0;
+
+		for (int count = 1; count <= numPairs; count++)
+		{
+			int endSegment1 = beginSegment1 + segmentLength - 1;
+
+			int beginSegment2 = endSegment1 + 1;
+			int endSegment2 = beginSegment2 + segmentLength - 1;
+
+			R_Merge(beginSegment1, endSegment1, endSegment2);
+
+			beginSegment1 = endSegment2 + 1;
+		}
+		// returns index of element after last merged pair
+		return beginSegment1;//modify this line
 	}
 
 	public void I_Merge(int first, int mid, int last)
 	{
 		//You need to complete this part.
+		int beginHalf1 = first;
+		int endHalf1 = mid;
+		int beginHalf2 = mid+1;
+		int endHalf2 = last;
+
+		//while both arrays are not empty
+		//copy smaller item into temp array
+
+		int index = beginHalf1;
+
+		for (; (beginHalf1 <= endHalf1) && (beginHalf2 <= endHalf2); index++)
+		{
+			if (lines_lengths[beginHalf1] < lines_lengths[beginHalf2])
+			{
+				tempArray[index] = lines_lengths[beginHalf1];
+				beginHalf1++;
+			}
+			else
+			{
+				tempArray[index] = lines_lengths[beginHalf2];
+				beginHalf2++;
+			}
+		}
+
+		//finish first subarray
+		for (; beginHalf1 <= endHalf1; beginHalf1++, index++)
+		{
+			tempArray[index] = lines_lengths[beginHalf1];
+		}
+
+		//finish second subarray
+		for (; beginHalf2 <= endHalf2; beginHalf2++, index++)
+		{
+			tempArray[index] = lines_lengths[beginHalf2];
+		}
+
+		for(index = first; index <= last; index++)
+		{
+			lines_lengths[index] = tempArray[index];
+			//paintComponent(this.getGraphics());
+		}
 
 		//redrawing the lines_lengths 
 		paintComponent(this.getGraphics());
