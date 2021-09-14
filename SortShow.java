@@ -6,6 +6,12 @@ import java.awt.*;
 import java.util.Calendar;
 import java.util.Random;
 
+/*
+	Jorge Guzman JVG0042
+	Raymond Mullikin RPM018
+	Cade Johnson CAJ0220
+*/
+
 //The class that has all the sorts in it
 public class SortShow extends JPanel { 
 
