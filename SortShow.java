@@ -68,7 +68,7 @@ public class SortShow extends JPanel {
 			Calendar start = Calendar.getInstance();
 			//Using the selection sort to lines_lengths sort the array
 
-
+			//swaps the index of i with the index of the next smallest number index and paints it
 			for (int i = 0; i < total_number_of_lines - 1; i++)
 			{
 				int indexOfNextSmallest = getIndexOfSmallest(i, total_number_of_lines - 1);
@@ -91,6 +91,7 @@ public class SortShow extends JPanel {
 
 			int smallest = first;
 
+			//iterates through the lines_lengths array to find the smallest value
 			for (int i = first + 1; i <= last; i++)
 			{
 				if (lines_lengths[i] < lines_lengths[smallest])
