@@ -113,8 +113,8 @@ public class SortShow extends JPanel {
 			//assigning the size for the tempArray below
 			tempArray = new int[total_number_of_lines];
 
+			//Call recursive merge sort
 			R_MergeSort(0, total_number_of_lines - 1);
-			//You need to complete this part.
 
 			Calendar end = Calendar.getInstance();
 	        SortGUI.rmergeTime = end.getTime().getTime() - start.getTime().getTime();
@@ -125,12 +125,12 @@ public class SortShow extends JPanel {
 		public void R_MergeSort(int first, int last){
 			if(first < last){
 
+				//Recursively call this function
 				int mid = (first + last) / 2;
 				R_MergeSort(first, mid);
 				R_MergeSort(mid + 1, last);
 
 				R_Merge(first, mid, last);
-				//You need to complete this part.
 
 				//Causing a delay for 10ms
 				delay(10);
@@ -147,6 +147,7 @@ public class SortShow extends JPanel {
 			int endHalf2 = last;
 			int index = beginHalf1;
 
+			//Sorts and combines the two individual unsorted sides
 			while((beginHalf1 <= endHalf1)&&(beginHalf2 <= endHalf2))
 			{
 				if(lines_lengths[beginHalf1] < lines_lengths[beginHalf2])
@@ -162,6 +163,7 @@ public class SortShow extends JPanel {
 				index++;
 			}
 
+			//Add the remaining elements of one side of the array if leftover
 			while(beginHalf1 <= endHalf1)
 			{
 				tempArray[index] = lines_lengths[beginHalf1];
@@ -175,12 +177,12 @@ public class SortShow extends JPanel {
 				index++;
 			}
 
+			//Copy the sorted elements in temp array into the permanent array
 			for(int i = first; i <= last; i++)
 			{
 				lines_lengths[i] = tempArray[i];
 			}
 			paintComponent(this.getGraphics());
-			//You need to complete this part.
 				
 		}
 		
